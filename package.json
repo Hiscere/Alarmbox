@@ -1,0 +1,19 @@
+{
+  "name": "gowno",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.13.3",
+    "fs": "0.0.2",
+    "path": "^0.12.7",
+    "rethinkdb": "^2.2.1",
+    "rethinkdbdash": "^2.2.15",
+    "socket.io": "^1.3.7"
+  }
+}
