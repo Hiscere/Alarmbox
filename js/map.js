@@ -33,12 +33,17 @@ function initMap() {
   socket.emit("news", {"event_type":"closed"});
   socket.on("asd", function (data) {
     console.log(4);
+      var dataServerGive = JSON.parse(data);
       console.log(data);
-    if (data.event_type == "opened") {
+      
+      console.log(dataServerGive.event_type);
+    if (dataServerGive.event_type == "closed") {
         console.log(marker.icon);
+        marker.setAnimation(null);
         marker.icon = green;
            
     }else{
+        marker.icon =red;
         marker.setAnimation(google.maps.Animation.BOUNCE);
     };
       
