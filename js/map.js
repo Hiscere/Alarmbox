@@ -30,7 +30,6 @@ function initMap() {
 
             
   var socket = io.connect();
-  socket.emit("news", {"event_type":"closed"});
   socket.on("asd", function (data) {
     console.log(4);
       var dataServerGive = JSON.parse(data);
