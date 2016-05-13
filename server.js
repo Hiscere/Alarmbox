@@ -21,8 +21,7 @@ app.use(express.static(__dirname));
 app.use(express.static(__dirname+ "/css"));
 app.use(express.static(__dirname+ "/fonts"));
 app.use(express.static(__dirname+ "/js"));
-app.use(express.static(__dirname+ "/data"));
-app.use(express.static(__dirname+ "/polymer_items"));
+
 app.get('/', function (req, res) {
     res.sendfile(__dirname + '/public/index.html');
   
@@ -48,22 +47,24 @@ function handleDisconnect() {
         
         io.on('connection', function(socket) {
                     console.log("TO ON");
-                    socket.emit("asdasd", "dziala");    
-                
+                    socket.emit("asd", {event_type:"closed", auth:"true"});
                      
             
             socket.on('news', function (data){
                 console.log(data);
-                var dataServerGet = JSON.stringify(data);
-                socket.broadcast.emit("asd", dataServerGet);
+                socket.broadcast.emit("asd", data);
             });
             
             
             
             
                 
-           
-          
+           // socket.on('news', function (data) {
+           //      console.log(data);
+           //     connection.query("INSERT INTO logs SET data = data.data, event_type = data.event_type, mac_address = data.mac_address", function (err, rows, fields) {
+           //     socket.emit('news', data);
+           //     });
+           // }); 
         });
     });
     

@@ -1,0 +1,27 @@
+
+body, html {
+  font-family: 'Roboto', Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+}
+
+paper-card {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  z-index: 1;
+}
+
+[main] {
+  background-color:#F9F9F9;
+  
+}
+
+[drawer] {
+  background-color:#FFFFFF;
+  
+}
+core-drawer-panel:not([narrow]) #navicon {
+  display:none;
+}
+

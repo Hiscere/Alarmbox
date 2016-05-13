@@ -1,0 +1,83 @@
+
+<dom-module id="main-map">
+<template>
+    <style>
+        google-map {
+            display: block;
+            width: 100%;
+            height:100%;
+        }
+    </style>
+    
+   <google-map map="{{map}}" latitude="52.0535631" longitude="19.5249493" zoom="7" api-key="AIzaSyDzAJXaym6JikJrDR3WtPYowBt2nIK6JKA" id = "mapka" disable-default-ui >
+        <template is="dom-repeat" items="{{xMarker}}">
+             <google-map-marker map={{map}} latitude="{{item.latitudine}}" longitude="{{item.longitudine}}" animation="{{item.animation}}" icon = "{{item.icon}}" id = "markerr">
+            </google-map-marker>
+        </template>
+    </google-map>
+</template>
+    
+<script src="../jquery.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<script>
+    var socket = io.connect();
+    Polymer({
+        is: 'main-map', 
+        properties: {
+            xMarker: {
+                type: Array,
+                }
+            },
+        ready: function() {
+            socket.on("asd", function(data) {
+                this.xMarker = [{
+                    latitudine: myLatLng.lat,
+                    longitudine: myLatLng.lng,
+                    animation: 'BOUNCE',
+                    icon: red
+                }];
+                console.log(data);
+                console.log(this.xMarker);
+                
+                if (data.event_type === "closed") {
+                    this.xMarker = [{
+                        latitudine: myLatLng.lat,
+                        longitudine: myLatLng.lng,
+                        animation: null,
+                        icon: green
+                }];
+                }else{
+                    if (data.auth === "true") {
+                        this.xMarker = [{
+                            latitudine: myLatLng.lat,
+                            longitudine: myLatLng.lng,
+                            animation: null,
+                            icon: red
+                }];
+                    }else{
+                        this.xMarker = [{
+                            latitudine: myLatLng.lat,
+                            longitudine: myLatLng.lng,
+                            animation: 'BOUNCE',
+                            icon: red
+                }];
+                    }
+                }
+            }.bind(this));
+        }
+        });
+        
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = 0;
+var myLatLng = {lat: 52.0535631, lng: 19.5249493};
+var red = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + labels[labelIndex++ % labels.length] + "|FE7569";
+var green = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + labels[labelIndex++ % labels.length] + "|76ff03";
+var bounce = "BOUNCE";
+var socket = io.connect();
+var mark = $("#markerr");
+    
+ //DEBUG
+
+</script>
+</dom-module>
